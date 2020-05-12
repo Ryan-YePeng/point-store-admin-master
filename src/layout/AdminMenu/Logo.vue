@@ -28,7 +28,7 @@
     },
     data() {
       return {
-        title: 'RYAN-后台管理',
+        title: '超市 - 后台管理',
         logo: Logo
       }
     }

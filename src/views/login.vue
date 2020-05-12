@@ -3,7 +3,7 @@
     <div id="el-login-container">
       <el-form ref="Form" :model="form" :rules="rules" label-position="left" label-width="0px" class="login-form">
         <h3 class="title">
-          RYAN-ADMIN 后台管理系统
+          超市 后台管理系统
         </h3>
         <el-form-item prop="username">
           <el-input v-model="form.username" type="text" auto-complete="off" placeholder="账号">

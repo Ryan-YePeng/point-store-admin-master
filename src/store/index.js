@@ -18,22 +18,22 @@ const modules = modulesFiles.keys().reduce((modules, modulePath) => {
 // vuex持久化
 const plugins = [
   createPersistedState({
-    key: 'RYAN-ADMIN-INFO',
+    key: 'POINT-STORE-ADMIN-INFO',
     storage: window.localStorage,
     reducer: val => ({info: val.info})
   }),
   createPersistedState({
-    key: 'RYAN-ADMIN-SETTINGS',
+    key: 'POINT-STORE-ADMIN-SETTINGS',
     storage: window.localStorage,
     reducer: val => ({settings: val.settings})
   }),
   createPersistedState({
-    key: 'RYAN-ADMIN-LAYOUT',
+    key: 'POINT-STORE-ADMIN-LAYOUT',
     storage: window.sessionStorage,
     reducer: val => ({layout: val.layout})
   }),
   createPersistedState({
-    key: 'RYAN-ADMIN-TOKEN',
+    key: 'POINT-STORE-ADMIN-TOKEN',
     storage: {
       getItem: key => Cookies.get(key),
       setItem: (key, value) =>

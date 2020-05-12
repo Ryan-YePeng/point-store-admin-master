@@ -2,7 +2,7 @@ module.exports = {
   /**
    * @description 网站标题
    */
-  title: 'RYAN-ADMIN',
+  title: '超市',
   /**
    * @description 是否启用history
    */
