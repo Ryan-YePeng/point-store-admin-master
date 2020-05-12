@@ -43,7 +43,9 @@
     },
     methods: {
       listMemberLevel() {
+        this.$refs.ElementTable.start();
         listMemberLevelApi().then(result => {
+          this.$refs.ElementTable.stop();
           this.formData = result.resultParam.memberLevelList
         })
       },

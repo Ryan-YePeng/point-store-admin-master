@@ -2,25 +2,17 @@
   <el-card class="box-card">
     <div slot="header" class="clearfix">
       <el-input placeholder="输入编号搜索" v-model="searchUserNumber" clearable class="w-200"
-                @keyup.enter.native="searchDept"/>
-      <el-button type="success" class="el-icon-search ml-5" @click="searchDept">搜索</el-button>
-      <el-button class="float-right" type="primary" icon="el-icon-plus" @click="add">新增</el-button>
+                @keyup.enter.native="pageFeedBack"/>
+      <el-button type="success" class="el-icon-search ml-5" @click="pageFeedBack">搜索</el-button>
     </div>
     <element-table ref="ElementTable" :data="formData">
-      <el-table-column prop="name" label="部门名称"></el-table-column>
-      <el-table-column label="状态">
+      <el-table-column prop="userNumber" label="顾客编号"></el-table-column>
+      <el-table-column prop="userNickName" label="姓名"></el-table-column>
+      <el-table-column prop="userPhone" label="联系方式"></el-table-column>
+      <el-table-column prop="content" label="反馈内容"></el-table-column>
+      <el-table-column label="提交时间">
         <template slot-scope="scope">
-          <el-tag type="success" v-if="scope.row.enabled">启用</el-tag>
-          <el-tag type="info" v-else>停用</el-tag>
-        </template>
-      </el-table-column>
-      <el-table-column label="操作" fixed="right" align="center" width="150">
-        <template slot-scope="scope">
-          <el-button type="primary" icon="el-icon-edit" @click.stop="edit(scope.row)"></el-button>
-          <delete-button
-              :ref="scope.row.id"
-              :id="scope.row.id"
-              @start="deleteDept"/>
+          <span>{{scope.row.createTime | formatDateTime}}</span>
         </template>
       </el-table-column>
     </element-table>
@@ -44,13 +36,18 @@
     },
     methods: {
       pageFeedBack() {
+        let pagination = this.$refs.Pagination;
         let param = {
-          current: 1,
-          size: 10,
+          current: pagination.current,
+          size: pagination.size,
           userNumber: this.searchUserNumber
         };
+        this.$refs.ElementTable.start();
         pageFeedBackApi(param).then(result => {
-          console.log(result)
+          this.$refs.ElementTable.stop();
+          let response = result.resultParam.feedBackPage;
+          this.formData = response.records;
+          pagination.total = response.total
         })
       }
     }
