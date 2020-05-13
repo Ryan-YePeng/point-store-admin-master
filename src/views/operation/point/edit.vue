@@ -1,33 +1,32 @@
 <template>
   <el-dialog
-      title="新增等级"
+      title="新增积分"
       width="500px"
       @close="cancel"
       :close-on-click-modal="false"
       :visible.sync="visible">
-    <el-form :model="form" :rules="rules" ref="Form" label-width="80px">
-      <el-form-item label="名称" prop="name">
-        <el-input v-model="form.name"></el-input>
-      </el-form-item>
-      <el-form-item label="编号" prop="number">
+    <el-form :model="form" :rules="rules" ref="Form" label-width="100px">
+      <el-form-item label="商品编号" prop="number">
         <el-input v-model="form.number"></el-input>
       </el-form-item>
-      <el-form-item label="积分下限" prop="scoreFloor">
-        <el-input-number
-            v-model="form.scoreFloor"
-            controls-position="right"
-            :precision="0"
-            :min="0">
-        </el-input-number>
-      </el-form-item>
-      <el-form-item label="积分上限" prop="scoreCeil">
-        <el-input-number
-            v-model="form.scoreCeil"
-            controls-position="right"
-            :precision="0"
-            :min="0">
-        </el-input-number>
-      </el-form-item>
+      <row-col>
+        <el-form-item label="兑换金额" prop="price">
+          <el-input-number
+              v-model="form.price"
+              controls-position="right"
+              :precision="2"
+              :min="0">
+          </el-input-number>
+        </el-form-item>
+        <el-form-item slot="r" label="商品积分" prop="score">
+          <el-input-number
+              v-model="form.score"
+              controls-position="right"
+              :precision="0"
+              :min="0">
+          </el-input-number>
+        </el-form-item>
+      </row-col>
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button @click="visible = false">取 消</el-button>
@@ -37,24 +36,23 @@
 </template>
 
 <script>
-  import {addMemberLevelApi} from '@/api/level'
+  import {editScoreApi} from '@/api/point'
 
   export default {
-    name: "AddLevel",
+    name: "EditPoint",
     data() {
       return {
         visible: false,
         form: {
-          name: '',
-          number: '',
-          scoreFloor: 0,
-          scoreCeil: 0
+          id: null,
+          number: '', // 编号
+          price: '', // 金额
+          score: '', // 积分
         },
         rules: {
-          name: {required: true, message: '请输入名称', trigger: 'blur'},
           number: {required: true, message: '请输入编号', trigger: 'blur'},
-          scoreFloor: {required: true, message: '请输入积分下限', trigger: 'change'},
-          scoreCeil: {required: true, message: '请输入积分上限', trigger: 'change'}
+          price: {required: true, message: '请输入价格', trigger: 'change'},
+          score: {required: true, message: '请输入积分', trigger: 'change'}
         }
       }
     },
@@ -64,7 +62,7 @@
           if (valid) {
             let data = {...this.form};
             this.$refs.SubmitButton.start();
-            addMemberLevelApi(data).then(() => {
+            editScoreApi(data).then(() => {
               this.$refs.SubmitButton.stop();
               this.$emit('update');
               this.cancel()
@@ -84,5 +82,3 @@
     }
   }
 </script>
-
-

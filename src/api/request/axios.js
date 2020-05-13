@@ -30,6 +30,12 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   response => {
     const {message, status} = response.data;
+    if (response.data.hasOwnProperty('resultParam')) {
+      if (response.data.resultParam.hasOwnProperty('reason')) {
+        errorMsg(response.data.resultParam.reason);
+        return response.data
+      }
+    }
     if (!isEmpty(message) && status === 200) successMsg(message);
     if (!isEmpty(message) && status !== 200) errorMsg(message);
     return response.data;

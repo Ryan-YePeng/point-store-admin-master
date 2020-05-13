@@ -54,8 +54,8 @@
         rules: {
           name: {required: true, message: '请输入名称', trigger: 'blur'},
           number: {required: true, message: '请输入编号', trigger: 'blur'},
-          scoreFloor: {required: true, message: '请输入积分下限', trigger: 'blur'},
-          scoreCeil: {required: true, message: '请输入积分上限', trigger: 'blur'}
+          scoreFloor: {required: true, message: '请输入积分下限', trigger: 'change'},
+          scoreCeil: {required: true, message: '请输入积分上限', trigger: 'change'}
         }
       }
     },
