@@ -44,7 +44,7 @@
   #home {
     width: 100%;
     box-shadow: 0 0 3px 3px silver;
-    background: url('../../assets/home.jpg') no-repeat top right;
+    background: url('../../assets/home.png') no-repeat top right;
     background-size: cover;
   }
 </style>

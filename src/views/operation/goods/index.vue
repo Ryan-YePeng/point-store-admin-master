@@ -9,10 +9,10 @@
     <element-table ref="ElementTable" :data="formData">
       <el-table-column prop="number" label="编号"></el-table-column>
       <el-table-column prop="name" label="名称"></el-table-column>
-      <el-table-column prop="scoreFloor" label="展示图片">
+      <el-table-column label="展示图片">
         <template slot-scope="scope">
           <el-avatar shape="square" :size="44" :src="baseUrl + scope.row.picture">
-            <img src="../../../assets/notFound.png" alt="头像"/>
+            <img src="../../../assets/notFound.png" alt="展示图片"/>
           </el-avatar>
         </template>
       </el-table-column>

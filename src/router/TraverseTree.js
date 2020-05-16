@@ -1,6 +1,5 @@
 /**
  *
- * @author 王业鹏
  * @description 根据树状结构菜单自动引入.vue文件
  * @date 2020/03/16 21:44
  * @class TraverseTree

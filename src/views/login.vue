@@ -135,7 +135,7 @@
     justify-content: center;
     align-items: center;
     height: 100%;
-    background: url("../assets/background.png") no-repeat center center;
+    background: url("../assets/home.png") no-repeat center center;
     background-size: cover;
 
     .title {
@@ -143,12 +143,11 @@
       text-align: center;
       font-size: 18px;
       font-weight: 600;
-      color: #ffffff;
     }
 
     .login-form {
       border-radius: 6px;
-      background: rgba(0, 0, 0, .15);
+      background: white;
       width: 350px;
       padding: 25px 25px 5px 25px;
 

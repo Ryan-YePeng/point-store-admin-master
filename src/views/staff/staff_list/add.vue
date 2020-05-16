@@ -1,34 +1,31 @@
 <template>
   <el-dialog
-      title="新增岗位"
-      width="500px"
+      title="新增柜员"
+      width="450px"
       @close="cancel"
       :close-on-click-modal="false"
       :visible.sync="visible">
     <el-form :model="form" :rules="rules" ref="Form" label-width="80px">
-      <el-form-item label="名称" prop="name">
-        <el-input v-model="form.name"></el-input>
+      <el-form-item label="柜员编号" prop="username">
+        <el-input v-model="form.username"></el-input>
       </el-form-item>
-      <el-form-item label="排序" prop="sort">
-        <el-input-number
-            v-model="form.sort"
-            controls-position="right"
-            :min="1">
-        </el-input-number>
+      <el-form-item label="柜员名称" prop="nickName">
+        <el-input v-model="form.nickName"></el-input>
+      </el-form-item>
+      <el-form-item label="电话" prop="phone">
+        <el-input v-model="form.phone"></el-input>
+      </el-form-item>
+      <el-form-item label="性别">
+        <el-radio-group v-model="form.sex">
+          <el-radio label="男"></el-radio>
+          <el-radio label="女"></el-radio>
+        </el-radio-group>
       </el-form-item>
       <el-form-item label="状态">
         <el-radio-group v-model="form.enabled">
-          <el-radio :label="true">启用</el-radio>
-          <el-radio :label="false">停用</el-radio>
+          <el-radio :label="true">激活</el-radio>
+          <el-radio :label="false">禁用</el-radio>
         </el-radio-group>
-      </el-form-item>
-      <el-form-item label="所属部门" prop="deptId">
-        <tree-select
-            v-model="form.deptId"
-            :options="dept"
-            :normalizer="normalizer"
-            :default-expand-level="1"
-            placeholder=""/>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -39,18 +36,11 @@
 </template>
 
 <script>
-  import TreeSelect from '@riophae/vue-treeselect'
-  import {addJobApi} from '@/api/job'
+  import {addUserApi} from '@/api/user'
+  import {validatePhone, validateUsername} from '@/utils/validate'
 
   export default {
-    name: "AddJob",
-    components: {TreeSelect},
-    props: {
-      dept: {
-        type: Array,
-        default: []
-      }
-    },
+    name: "AddStaff",
     data() {
       return {
         normalizer(node) {
@@ -60,15 +50,25 @@
         },
         visible: false,
         form: {
-          name: '',
-          sort: 999,
+          username: '',
+          nickName: '',
+          number: '',
+          sex: '男',
+          phone: '',
           enabled: true,
-          deptId: null
+          rolesId: [2]
         },
+        options: [],
         rules: {
-          name: {required: true, message: '请输入名称', trigger: 'blur'},
-          sort: {required: true, message: '请输入排序', trigger: 'blur'},
-          deptId: {required: true, message: '请选择部门', trigger: 'blur'}
+          username: [
+            {required: true, message: '请输入用户名', trigger: 'blur'},
+            {validator: validateUsername, trigger: 'blur'}
+          ],
+          nickName: {required: true, message: '请输入柜员名称', trigger: 'blur'},
+          phone: [
+            {required: true, message: '请输入柜员电话', trigger: 'blur'},
+            {validator: validatePhone, trigger: 'blur'}
+          ]
         }
       }
     },
@@ -77,8 +77,9 @@
         this.$refs['Form'].validate((valid) => {
           if (valid) {
             let data = {...this.form};
+            data.number = data.username;
             this.$refs.SubmitButton.start();
-            addJobApi(data).then(() => {
+            addUserApi(data).then(() => {
               this.$refs.SubmitButton.stop();
               this.$emit('update');
               this.cancel()

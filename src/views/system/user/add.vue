@@ -23,26 +23,6 @@
         </el-form-item>
       </row-col>
       <row-col>
-        <el-form-item label="部门" prop="deptId">
-          <tree-select v-model="form.deptId"
-                       :options="dept"
-                       :normalizer="normalizer"
-                       :default-expand-level="1"
-                       sort-value-by="INDEX"
-                       @input="changeDept"
-                       placeholder=""/>
-        </el-form-item>
-        <el-form-item slot="r" label="岗位" prop="jobId">
-          <el-select v-model="form.jobId" placeholder="请先选择部门">
-            <el-option
-                v-for="item in options"
-                :key="item.id"
-                :value="item.id"
-                :label="item.name"/>
-          </el-select>
-        </el-form-item>
-      </row-col>
-      <row-col>
         <el-form-item label="性别">
           <el-radio-group v-model="form.sex">
             <el-radio label="男"></el-radio>
@@ -84,10 +64,6 @@
     name: "AddUser",
     components: {TreeSelect},
     props: {
-      dept: {
-        type: Array,
-        default: []
-      },
       roleList: {
         type: Array,
         default: []
