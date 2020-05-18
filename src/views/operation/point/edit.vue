@@ -6,27 +6,22 @@
       :close-on-click-modal="false"
       :visible.sync="visible">
     <el-form :model="form" :rules="rules" ref="Form" label-width="100px">
-      <el-form-item label="商品编号" prop="number">
-        <el-input v-model="form.number"></el-input>
+      <el-form-item label="消费金额" prop="price">
+        <el-input-number
+            v-model="form.price"
+            controls-position="right"
+            :precision="2"
+            :min="0">
+        </el-input-number>
       </el-form-item>
-      <row-col>
-        <el-form-item label="兑换金额" prop="price">
-          <el-input-number
-              v-model="form.price"
-              controls-position="right"
-              :precision="2"
-              :min="0">
-          </el-input-number>
-        </el-form-item>
-        <el-form-item slot="r" label="商品积分" prop="score">
-          <el-input-number
-              v-model="form.score"
-              controls-position="right"
-              :precision="0"
-              :min="0">
-          </el-input-number>
-        </el-form-item>
-      </row-col>
+      <el-form-item label="兑换积分" prop="score">
+        <el-input-number
+            v-model="form.score"
+            controls-position="right"
+            :precision="0"
+            :min="0">
+        </el-input-number>
+      </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button @click="visible = false">取 消</el-button>
@@ -45,12 +40,10 @@
         visible: false,
         form: {
           id: null,
-          number: '', // 编号
           price: '', // 金额
           score: '', // 积分
         },
         rules: {
-          number: {required: true, message: '请输入编号', trigger: 'blur'},
           price: {required: true, message: '请输入价格', trigger: 'change'},
           score: {required: true, message: '请输入积分', trigger: 'change'}
         }

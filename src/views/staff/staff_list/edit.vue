@@ -6,7 +6,7 @@
       :close-on-click-modal="false"
       :visible.sync="visible">
     <el-form :model="form" :rules="rules" ref="Form" label-width="100px">
-      <el-form-item label="柜员编号" prop="username">
+      <el-form-item label="柜员账号">
         <el-input v-model="form.username" :disabled="true"></el-input>
       </el-form-item>
       <el-form-item label="柜员名称" prop="nickName">
@@ -74,7 +74,6 @@
         this.$refs['Form'].validate((valid) => {
           if (valid) {
             let data = {...this.form};
-            data.number = data.username;
             delete data.username;
             this.$refs.SubmitButton.start();
             editUserApi(data).then(() => {

@@ -7,10 +7,7 @@
       :visible.sync="visible">
     <el-form :model="form" :rules="rules" ref="Form" label-width="100px">
       <row-col>
-        <el-form-item label="商品编号" prop="number">
-          <el-input v-model="form.number"></el-input>
-        </el-form-item>
-        <el-form-item slot="r" label="商品名称" prop="name">
+        <el-form-item label="商品名称" prop="name">
           <el-input v-model="form.name"></el-input>
         </el-form-item>
       </row-col>
@@ -33,7 +30,7 @@
         </el-form-item>
       </row-col>
       <el-form-item label="商品图片" prop="picture">
-        <image-uploader-plus :image-url="form.picture" @getImage="getImage"/>
+        <image-uploader-plus ref="ImageUploaderPlus" :image-url="form.picture" @getImage="getImage"/>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -55,7 +52,6 @@
         visible: false,
         form: {
           id: null,
-          number: '', // 编号
           name: '', // 名称
           picture: '', // 图片
           price: 0, // 价格
@@ -95,7 +91,8 @@
       cancel() {
         this.visible = false;
         Object.assign(this.$data.form, this.$options.data().form);
-        this.$refs['Form'].resetFields()
+        this.$refs['Form'].resetFields();
+        this.$refs['ImageUploaderPlus'].clearFiles();
       }
     }
   }

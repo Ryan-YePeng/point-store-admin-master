@@ -5,8 +5,8 @@
       <el-button class="float-right" type="primary" icon="el-icon-plus" @click="add">新增</el-button>
     </div>
     <element-table ref="ElementTable" :data="formData">
-      <el-table-column prop="number" label="积分编号"></el-table-column>
-      <el-table-column prop="price" label="兑换金额"></el-table-column>
+      <el-table-column prop="number" label="编号"></el-table-column>
+      <el-table-column prop="price" label="消费金额"></el-table-column>
       <el-table-column prop="score" label="兑换积分"></el-table-column>
       <el-table-column prop="enable" label="状态">
         <template slot-scope="scope">

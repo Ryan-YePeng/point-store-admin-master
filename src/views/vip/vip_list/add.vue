@@ -6,7 +6,7 @@
       :close-on-click-modal="false"
       :visible.sync="visible">
     <el-form :model="form" :rules="rules" ref="Form" label-width="80px">
-      <el-form-item label="会员编号" prop="username">
+      <el-form-item label="会员账号" prop="username">
         <el-input v-model="form.username"></el-input>
       </el-form-item>
       <el-form-item label="会员昵称" prop="nickName">
@@ -61,10 +61,10 @@
         options: [],
         rules: {
           username: [
-            {required: true, message: '请输入用户名', trigger: 'blur'},
+            {required: true, message: '请输入会员账号', trigger: 'blur'},
             {validator: validateUsername, trigger: 'blur'}
           ],
-          nickName: {required: true, message: '请输入昵称', trigger: 'blur'},
+          nickName: {required: true, message: '请输入会员昵称', trigger: 'blur'},
           phone: [
             {required: true, message: '请输入会员电话', trigger: 'blur'},
             {validator: validatePhone, trigger: 'blur'}
@@ -77,7 +77,6 @@
         this.$refs['Form'].validate((valid) => {
           if (valid) {
             let data = {...this.form};
-            data.number = data.username;
             this.$refs.SubmitButton.start();
             addUserApi(data).then(() => {
               this.$refs.SubmitButton.stop();

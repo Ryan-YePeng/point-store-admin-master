@@ -24,7 +24,7 @@
     components: {GoodsConversion, PointConversion, OrderList},
     data() {
       return {
-        active: '订单列表'
+        active: '商品兑换'
       }
     }
   }

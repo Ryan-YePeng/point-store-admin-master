@@ -9,25 +9,24 @@
       <el-form-item label="名称" prop="name">
         <el-input v-model="form.name"></el-input>
       </el-form-item>
-      <el-form-item label="编号" prop="number">
-        <el-input v-model="form.number"></el-input>
-      </el-form-item>
-      <el-form-item label="积分下限" prop="scoreFloor">
-        <el-input-number
-            v-model="form.scoreFloor"
-            controls-position="right"
-            :precision="0"
-            :min="0">
-        </el-input-number>
-      </el-form-item>
-      <el-form-item label="积分上限" prop="scoreCeil">
-        <el-input-number
-            v-model="form.scoreCeil"
-            controls-position="right"
-            :precision="0"
-            :min="0">
-        </el-input-number>
-      </el-form-item>
+      <row-col>
+        <el-form-item label="积分下限" prop="scoreFloor">
+          <el-input-number
+              v-model="form.scoreFloor"
+              controls-position="right"
+              :precision="0"
+              :min="0">
+          </el-input-number>
+        </el-form-item>
+        <el-form-item slot="r" label="积分上限" prop="scoreCeil">
+          <el-input-number
+              v-model="form.scoreCeil"
+              controls-position="right"
+              :precision="0"
+              :min="0">
+          </el-input-number>
+        </el-form-item>
+      </row-col>
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button @click="visible = false">取 消</el-button>
@@ -47,13 +46,11 @@
         form: {
           id: null,
           name: '',
-          number: '',
           scoreFloor: 0,
           scoreCeil: 0
         },
         rules: {
           name: {required: true, message: '请输入名称', trigger: 'blur'},
-          number: {required: true, message: '请输入编号', trigger: 'blur'},
           scoreFloor: {required: true, message: '请输入积分下限', trigger: 'change'},
           scoreCeil: {required: true, message: '请输入积分上限', trigger: 'change'}
         }

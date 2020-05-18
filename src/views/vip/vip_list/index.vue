@@ -8,7 +8,8 @@
         <el-button class="float-right" type="primary" icon="el-icon-plus" @click="add">新增</el-button>
       </div>
       <el-table v-loading="isTableLoading" :data="formData">
-        <el-table-column prop="username" label="会员编号"></el-table-column>
+        <el-table-column prop="number" label="会员编号"></el-table-column>
+        <el-table-column prop="username" label="会员账号"></el-table-column>
         <el-table-column prop="nickName" label="会员昵称"></el-table-column>
         <el-table-column prop="sex" label="性别"></el-table-column>
         <el-table-column prop="phone" label="电话"></el-table-column>

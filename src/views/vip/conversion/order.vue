@@ -9,7 +9,6 @@
       <el-table-column prop="number" label="兑换编号"></el-table-column>
       <el-table-column prop="userNumber" label="会员编号"></el-table-column>
       <el-table-column prop="userPhone" label="会员电话"></el-table-column>
-      <el-table-column prop="tellerNumber" label="柜员编号"></el-table-column>
       <el-table-column prop="goodsName" label="兑换商品"></el-table-column>
       <el-table-column prop="goodsScore" label="商品所需积分"></el-table-column>
       <el-table-column prop="count" label="兑换数量"></el-table-column>
@@ -25,7 +24,7 @@
       </el-table-column>
       <el-table-column label="操作" fixed="right" align="center" width="100">
         <template slot-scope="scope">
-          <el-button type="success" @click.stop="sure(scope.row)">交易确认</el-button>
+          <el-button type="success" @click.stop="sure(scope.row.id)">交易确认</el-button>
         </template>
       </el-table-column>
     </element-table>
@@ -34,7 +33,7 @@
 </template>
 
 <script>
-  import {pageOrdersApi,} from '@/api/goods'
+  import {pageOrdersApi, successExchangeApi} from '@/api/goods'
 
   export default {
     name: "OrderList",
@@ -48,8 +47,12 @@
       this.pageOrders()
     },
     methods: {
-      sure() {
-
+      sure(id) {
+        this.$msgBox('确认交易完成？').then(() => {
+          successExchangeApi({id}).then(() => {
+            this.pageOrders()
+          })
+        });
       },
       pageOrders() {
         let pagination = this.$refs.Pagination;
@@ -57,12 +60,12 @@
           current: pagination.current,
           size: pagination.size,
           number: this.searchNumber,
-          state: 0
+          state: 1
         };
         this.$refs.ElementTable.start();
         pageOrdersApi(param).then(result => {
           this.$refs.ElementTable.stop();
-          let response = result.resultParam.scoreOrdersPage;
+          let response = result.resultParam.ordersPage;
           this.formData = response.records;
           pagination.total = response.total
         })

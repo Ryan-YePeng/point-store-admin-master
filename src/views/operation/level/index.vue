@@ -5,8 +5,8 @@
       <el-button class="float-right" type="primary" icon="el-icon-plus" @click="add">新增</el-button>
     </div>
     <element-table ref="ElementTable" :data="formData">
-      <el-table-column prop="name" label="名称"></el-table-column>
       <el-table-column prop="number" label="编号"></el-table-column>
+      <el-table-column prop="name" label="名称"></el-table-column>
       <el-table-column prop="scoreFloor" label="积分下限"></el-table-column>
       <el-table-column prop="scoreCeil" label="积分上限"></el-table-column>
       <el-table-column label="操作" fixed="right" align="center" width="150">

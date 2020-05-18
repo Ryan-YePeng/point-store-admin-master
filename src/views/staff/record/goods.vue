@@ -54,7 +54,7 @@
           current: pagination.current,
           size: pagination.size,
           number: this.searchNumber,
-          state: 1
+          state: 2
         };
         this.$refs.ElementTable.start();
         pageOrdersApi(param).then(result => {
