@@ -1,4 +1,4 @@
-import {axiosD, axiosG, axiosK, axiosP} from "@/api/request";
+import { axiosD, axiosG, axiosK, axiosP } from "@/api/request";
 
 const addGoods = "goods/addGoods"; // 添加商品
 const delGoods = "goods/delGoods"; // 删除商品

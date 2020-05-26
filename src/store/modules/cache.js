@@ -1,5 +1,5 @@
-import store from '@/store'
-import router from '@/router'
+import store from "@/store";
+import router from "@/router";
 
 /**
  * @param {String} value
@@ -8,11 +8,12 @@ import router from '@/router'
  * */
 const transformName = value =>
   value.replace(/[_](\w)|\b(\w)/g, name =>
-    name.toUpperCase().replace(/[_]/g, ''));
+    name.toUpperCase().replace(/[_]/g, "")
+  );
 
 const type = {
-  SET_CACHE: 'SET_CACHE',
-  REFRESH_ROUTER: 'REFRESH_ROUTER'
+  SET_CACHE: "SET_CACHE",
+  REFRESH_ROUTER: "REFRESH_ROUTER"
 };
 
 const state = {
@@ -28,33 +29,35 @@ const mutations = {
     let tags = store.getters.tags;
     let cacheList = [];
     tags.forEach(item => {
-      if (item.cache) cacheList.push(transformName(item.name))
+      if (item.cache) cacheList.push(transformName(item.name));
     });
-    state.cache = cacheList
+    state.cache = cacheList;
   },
   [type.REFRESH_ROUTER](state, name) {
     let Name = transformName(name);
     state.cache.some((item, index) => {
       if (item === Name) {
         state.cache.splice(index, 1);
-        return true
+        return true;
       }
     });
-    router.replace({
-      name: 'redirect',
-      query: {name: name}
-    }).then(() => {
-      store.dispatch('setCache')
-    })
+    router
+      .replace({
+        name: "redirect",
+        query: { name: name }
+      })
+      .then(() => {
+        store.dispatch("setCache");
+      });
   }
 };
 
 const actions = {
-  setCache: ({commit}) => {
-    commit(type.SET_CACHE)
+  setCache: ({ commit }) => {
+    commit(type.SET_CACHE);
   },
-  refreshRouter: ({commit}, name) => {
-    commit(type.REFRESH_ROUTER, name)
+  refreshRouter: ({ commit }, name) => {
+    commit(type.REFRESH_ROUTER, name);
   }
 };
 
@@ -63,4 +66,4 @@ export default {
   getters,
   mutations,
   actions
-}
+};

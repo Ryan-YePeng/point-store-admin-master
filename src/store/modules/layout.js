@@ -1,18 +1,18 @@
-import router from '@/router'
+import router from "@/router";
 
 /* 布局设置 */
 const type = {
-  SET_ACTIVE: 'SET_ACTIVE',
-  SET_TAGS: 'SET_TAGS',
-  ADD_TAGS: 'ADD_TAGS',
-  DELETE_TAGS: 'DELETE_TAGS',
-  SET_BREADCRUMB: 'SET_BREADCRUMB'
+  SET_ACTIVE: "SET_ACTIVE",
+  SET_TAGS: "SET_TAGS",
+  ADD_TAGS: "ADD_TAGS",
+  DELETE_TAGS: "DELETE_TAGS",
+  SET_BREADCRUMB: "SET_BREADCRUMB"
 };
 
 const state = {
-  active: '首页',
+  active: "首页",
   breadcrumb: [],
-  tags: [{title: "首页", name: "home", cache: false, indexPath: []}]
+  tags: [{ title: "首页", name: "home", cache: false, indexPath: [] }]
 };
 
 const getters = {
@@ -24,15 +24,18 @@ const getters = {
 const mutations = {
   [type.SET_ACTIVE](state, active) {
     if (active) state.active = active;
-    else state.active = '首页'
+    else state.active = "首页";
   },
   [type.SET_BREADCRUMB](state, breadcrumb) {
     if (breadcrumb) state.breadcrumb = breadcrumb;
-    else state.breadcrumb = []
+    else state.breadcrumb = [];
   },
   [type.SET_TAGS](state, tags) {
     if (tags) state.tags = tags;
-    else state.tags = [{title: "首页", name: "home", cache: false, indexPath: []}]
+    else
+      state.tags = [
+        { title: "首页", name: "home", cache: false, indexPath: [] }
+      ];
   },
   [type.ADD_TAGS](state, tag) {
     let isExist = state.tags.some(item => {
@@ -52,7 +55,7 @@ const mutations = {
     index === state.tags.length - 1
       ? (nextTag = state.tags[index - 1])
       : (nextTag = state.tags[index + 1]);
-    router.push({name: nextTag.name});
+    router.push({ name: nextTag.name });
     state.active = nextTag.title;
     state.breadcrumb = nextTag.indexPath;
     state.tags.splice(index, 1);
@@ -60,28 +63,26 @@ const mutations = {
 };
 
 const actions = {
-  setActive: ({commit}, active) => {
-    commit(type.SET_ACTIVE, active)
+  setActive: ({ commit }, active) => {
+    commit(type.SET_ACTIVE, active);
   },
-  setTags: ({commit}, tags) => {
-    commit(type.SET_TAGS, tags)
+  setTags: ({ commit }, tags) => {
+    commit(type.SET_TAGS, tags);
   },
-  addTags: ({commit}, tags) => {
-    commit(type.ADD_TAGS, tags)
+  addTags: ({ commit }, tags) => {
+    commit(type.ADD_TAGS, tags);
   },
-  deleteTags: ({commit}, index) => {
-    commit(type.DELETE_TAGS, index)
+  deleteTags: ({ commit }, index) => {
+    commit(type.DELETE_TAGS, index);
   },
-  setBreadcrumb: ({commit}, breadcrumb) => {
-    commit(type.SET_BREADCRUMB, breadcrumb)
+  setBreadcrumb: ({ commit }, breadcrumb) => {
+    commit(type.SET_BREADCRUMB, breadcrumb);
   }
 };
-
 
 export default {
   state,
   getters,
   mutations,
   actions
-}
-
+};

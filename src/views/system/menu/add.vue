@@ -1,21 +1,33 @@
 <template>
   <el-dialog
-      title="新增菜单"
-      width="620px"
-      @close="cancel"
-      :close-on-click-modal="false"
-      :visible.sync="visible">
+    title="新增菜单"
+    width="620px"
+    @close="cancel"
+    :close-on-click-modal="false"
+    :visible.sync="visible"
+  >
     <el-form :model="form" :rules="rules" ref="Form" label-width="80px">
       <el-form-item label="菜单图标">
         <el-popover
-            placement="bottom-start"
-            width="450"
-            trigger="click"
-            @show="$refs['iconSelect'].reset()"
+          placement="bottom-start"
+          width="450"
+          trigger="click"
+          @show="$refs['iconSelect'].reset()"
         >
-          <icon-select ref="iconSelect" @selected="selected"/>
-          <el-input slot="reference" v-model="form.icon" style="width: 450px;" placeholder="点击选择图标" readonly>
-            <svg-icon v-if="form.icon" slot="prefix" :icon-class="form.icon" class="el-input-icon"/>
+          <icon-select ref="iconSelect" @selected="selected" />
+          <el-input
+            slot="reference"
+            v-model="form.icon"
+            style="width: 450px;"
+            placeholder="点击选择图标"
+            readonly
+          >
+            <svg-icon
+              v-if="form.icon"
+              slot="prefix"
+              :icon-class="form.icon"
+              class="el-input-icon"
+            />
             <i v-else slot="prefix" class="el-icon-search el-input__icon"></i>
           </el-input>
         </el-popover>
@@ -60,103 +72,107 @@
         </el-form-item>
         <el-form-item slot="r" label="菜单排序" prop="sort">
           <el-input-number
-              v-model="form.sort"
-              controls-position="right"
-              :min="1">
+            v-model="form.sort"
+            controls-position="right"
+            :min="1"
+          >
           </el-input-number>
         </el-form-item>
       </row-col>
       <el-form-item label="上级类目">
         <tree-select
-            v-model="form.pid"
-            :options="menu"
-            :normalizer="normalizer"
-            :default-expand-level="1"
-            placeholder=""/>
+          v-model="form.pid"
+          :options="menu"
+          :normalizer="normalizer"
+          :default-expand-level="1"
+          placeholder=""
+        />
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button @click="visible = false">取 消</el-button>
-      <submit-button ref="SubmitButton" @submit="submitForm"/>
+      <submit-button ref="SubmitButton" @submit="submitForm" />
     </div>
   </el-dialog>
 </template>
 
 <script>
-  import IconSelect from '@/components/IconSelect'
-  import TreeSelect from '@riophae/vue-treeselect'
-  import {addMenuApi} from '@/api/menu'
-  import {isEmpty} from "@/utils/common";
+import IconSelect from "@/components/IconSelect";
+import TreeSelect from "@riophae/vue-treeselect";
+import { addMenuApi } from "@/api/menu";
+import { isEmpty } from "@/utils/common";
 
-  export default {
-    name: "AddMenu",
-    components: {IconSelect, TreeSelect},
-    props: {
-      menu: {
-        type: Array,
-        default: []
-      }
-    },
-    data() {
-      return {
-        normalizer(node) {
-          return {
-            label: node.title
-          }
-        },
-        visible: false,
-        form: {
-          title: '',
-          permission: '',
-          name: '',
-          icon: '',
-          iframe: false,
-          hidden: false,
-          cache: false,
-          sort: 999,
-          pid: null
-        },
-        rules: {
-          title: {required: true, message: '请输入标题', trigger: 'blur'},
-          sort: {required: true, message: '请输入排序', trigger: 'change'}
-        }
-      }
-    },
-    methods: {
-      selected(name) {
-        this.form.icon = name
+export default {
+  name: "AddMenu",
+  components: { IconSelect, TreeSelect },
+  props: {
+    menu: {
+      type: Array,
+      default: () => []
+    }
+  },
+  data() {
+    return {
+      normalizer(node) {
+        return {
+          label: node.title
+        };
       },
-      submitForm() {
-        this.$refs['Form'].validate((valid) => {
-          if (valid) {
-            let data = {...this.form};
-            if (isEmpty(data.pid)) data.pid = 0;
-            data.name = data.name.trim();
-            this.$refs.SubmitButton.start();
-            addMenuApi(data).then(() => {
+      visible: false,
+      form: {
+        title: "",
+        permission: "",
+        name: "",
+        icon: "",
+        iframe: false,
+        hidden: false,
+        cache: false,
+        sort: 999,
+        pid: null
+      },
+      rules: {
+        title: { required: true, message: "请输入标题", trigger: "blur" },
+        sort: { required: true, message: "请输入排序", trigger: "change" }
+      }
+    };
+  },
+  methods: {
+    selected(name) {
+      this.form.icon = name;
+    },
+    submitForm() {
+      this.$refs["Form"].validate(valid => {
+        if (valid) {
+          let data = { ...this.form };
+          if (isEmpty(data.pid)) data.pid = 0;
+          data.name = data.name.trim();
+          this.$refs.SubmitButton.start();
+          addMenuApi(data)
+            .then(() => {
               this.$refs.SubmitButton.stop();
-              this.$emit('update');
-              this.cancel()
-            }).catch(() => {
-              this.$refs.SubmitButton.stop();
+              this.$emit("update");
+              this.cancel();
             })
-          } else {
-            return false;
-          }
-        });
-      },
-      cancel() {
-        this.visible = false;
-        Object.assign(this.$data.form, this.$options.data().form);
-        this.$refs['Form'].resetFields()
-      }
+            .catch(() => {
+              this.$refs.SubmitButton.stop();
+            });
+        } else {
+          return false;
+        }
+      });
+    },
+    cancel() {
+      this.visible = false;
+      Object.assign(this.$data.form, this.$options.data().form);
+      this.$refs["Form"].resetFields();
     }
   }
+};
 </script>
 
 <style lang="scss" scoped>
-  .el-input-icon {
-    height: 32px;
-    width: 16px;
-  }
+.el-input-icon {
+  height: 32px;
+  width: 16px;
+}
 </style>

@@ -1,10 +1,10 @@
-import router from '@/router'
-import store from '@/store'
+import router from "@/router";
+import store from "@/store";
 
 const type = {
-  SET_USER: 'SET_USER',
-  HAS_GENERATE_ROUTER: 'HAS_GENERATE_ROUTER',
-  QUIT_LOGIN: 'QUIT_LOGIN'
+  SET_USER: "SET_USER",
+  HAS_GENERATE_ROUTER: "HAS_GENERATE_ROUTER",
+  QUIT_LOGIN: "QUIT_LOGIN"
 };
 
 const state = {
@@ -20,30 +20,30 @@ const getters = {
 const mutations = {
   [type.SET_USER](state, user) {
     if (user) state.user = user;
-    else state.user = {}
+    else state.user = {};
   },
   [type.HAS_GENERATE_ROUTER](state) {
     state.hasGenerateRouter = true;
   },
   [type.QUIT_LOGIN]() {
-    router.push({name: 'login'});
-    store.dispatch('setActive');
-    store.dispatch('setTags');
-    store.dispatch('setBreadcrumb');
-    store.dispatch('setToken');
+    router.push({ name: "login" });
+    store.dispatch("setActive");
+    store.dispatch("setTags");
+    store.dispatch("setBreadcrumb");
+    store.dispatch("setToken");
     location.reload();
   }
 };
 
 const actions = {
-  setUser: ({commit}, user) => {
-    commit(type.SET_USER, user)
+  setUser: ({ commit }, user) => {
+    commit(type.SET_USER, user);
   },
-  setHasGenerateRouter: ({commit}) => {
-    commit(type.HAS_GENERATE_ROUTER)
+  setHasGenerateRouter: ({ commit }) => {
+    commit(type.HAS_GENERATE_ROUTER);
   },
-  quitLogin: ({commit}) => {
-    commit(type.QUIT_LOGIN)
+  quitLogin: ({ commit }) => {
+    commit(type.QUIT_LOGIN);
   }
 };
 
@@ -52,4 +52,4 @@ export default {
   getters,
   mutations,
   actions
-}
+};

@@ -1,18 +1,12 @@
 import Vue from "vue";
 import store from "@/store";
-import "./EUI_IN"
-import {
-  Message,
-  MessageBox,
-  Notification
-} from 'element-ui';
-
+import "./EUI_IN";
+import { Message, MessageBox, Notification } from "element-ui";
 
 /**
  * @description 组件大小
  */
-Vue.prototype.$ELEMENT = {size: store.getters.setting.layoutSize};
-
+Vue.prototype.$ELEMENT = { size: store.getters.setting.layoutSize };
 
 /**
  * @param {String} msg 提示信息
@@ -50,13 +44,16 @@ const errorNotify = msg => {
   });
 };
 
-
 /**
  * @param {String} text 提示信息
  * @param {String} confirmText 确认文字
  * @param {String} title 提示文字
  */
-export const msgBox = (text = "确定执行此操作吗？", confirmText = "确定", title = "提示") => {
+export const msgBox = (
+  text = "确定执行此操作吗？",
+  confirmText = "确定",
+  title = "提示"
+) => {
   return new Promise((resolve, reject) => {
     MessageBox.confirm(text, title, {
       confirmButtonText: confirmText,
@@ -64,17 +61,16 @@ export const msgBox = (text = "确定执行此操作吗？", confirmText = "确�
       type: "warning"
     })
       .then(result => resolve(result))
-      .catch(error => reject(error))
-  })
+      .catch(error => reject(error));
+  });
 };
-
 
 /**
  * @param {String} msg
  * @param {String} time
  * @description 报错信息不重复
  */
-let errorText = '';
+let errorText = "";
 let isForbid = false;
 export const errorMessage = (msg, time = 3000) => {
   if (isForbid && msg === errorText) return;
@@ -85,7 +81,6 @@ export const errorMessage = (msg, time = 3000) => {
     isForbid = false;
   }, time);
 };
-
 
 /**
  * @description 全局注册

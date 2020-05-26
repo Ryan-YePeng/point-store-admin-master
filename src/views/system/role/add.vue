@@ -1,10 +1,11 @@
 <template>
   <el-dialog
-      title="新增角色"
-      width="600px"
-      @close="cancel"
-      :close-on-click-modal="false"
-      :visible.sync="visible">
+    title="新增角色"
+    width="600px"
+    @close="cancel"
+    :close-on-click-modal="false"
+    :visible.sync="visible"
+  >
     <el-form :model="form" :rules="rules" ref="Form" label-width="120px">
       <row-col>
         <el-form-item label="角色名称" prop="name">
@@ -17,9 +18,10 @@
       <row-col>
         <el-form-item label="角色级别" prop="level">
           <el-input-number
-              v-model="form.level"
-              controls-position="right"
-              :min="level">
+            v-model="form.level"
+            controls-position="right"
+            :min="level"
+          >
           </el-input-number>
         </el-form-item>
         <el-form-item slot="r" label="数据范围">
@@ -30,16 +32,17 @@
           </el-select>
         </el-form-item>
       </row-col>
-      <el-form-item label="数据权限" v-if="form.dataScope==='自定义'">
+      <el-form-item label="数据权限" v-if="form.dataScope === '自定义'">
         <tree-select
-            v-model="form.deptIds"
-            :options="dept"
-            :normalizer="normalizer"
-            multiple
-            :flat="true"
-            :default-expand-level="1"
-            sort-value-by="INDEX"
-            placeholder=""/>
+          v-model="form.deptIds"
+          :options="dept"
+          :normalizer="normalizer"
+          multiple
+          :flat="true"
+          :default-expand-level="1"
+          sort-value-by="INDEX"
+          placeholder=""
+        />
       </el-form-item>
       <el-form-item label="描述">
         <el-input type="textarea" v-model="form.remark"></el-input>
@@ -47,80 +50,86 @@
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button @click="visible = false">取 消</el-button>
-      <submit-button ref="SubmitButton" @submit="submitForm"/>
+      <submit-button ref="SubmitButton" @submit="submitForm" />
     </div>
   </el-dialog>
 </template>
 
 <script>
-  import TreeSelect from '@riophae/vue-treeselect'
-  import {addRoleApi} from '@/api/role'
+import TreeSelect from "@riophae/vue-treeselect";
+import { addRoleApi } from "@/api/role";
 
-  export default {
-    name: "AddRole",
-    components: {TreeSelect},
-    props: {
-      dept: {
-        type: Array,
-        default: []
+export default {
+  name: "AddRole",
+  components: { TreeSelect },
+  props: {
+    dept: {
+      type: Array,
+      default: () => []
+    },
+    level: {
+      type: Number
+    }
+  },
+  data() {
+    return {
+      normalizer(node) {
+        return {
+          label: node.name
+        };
       },
-      level: {
-        type: Number
-      }
-    },
-    data() {
-      return {
-        normalizer(node) {
-          return {
-            label: node.name
-          }
+      visible: false,
+      form: {
+        nameZh: "",
+        name: "",
+        dataScope: "本级",
+        level: 1,
+        permission: "",
+        deptIds: [],
+        remark: ""
+      },
+      rules: {
+        name: { required: true, message: "请输入名称", trigger: "blur" },
+        permission: {
+          required: true,
+          message: "请输入角色权限",
+          trigger: "blur"
         },
-        visible: false,
-        form: {
-          nameZh: '',
-          name: '',
-          dataScope: '本级',
-          level: 1,
-          permission: '',
-          deptIds: [],
-          remark: ''
-        },
-        rules: {
-          name: {required: true, message: '请输入名称', trigger: 'blur'},
-          permission: {required: true, message: '请输入角色权限', trigger: 'blur'},
-          level: {required: true, message: '请输入角色级别', trigger: 'blur'}
-        }
+        level: { required: true, message: "请输入角色级别", trigger: "blur" }
       }
-    },
-    methods: {
-      submitForm() {
-        this.$refs['Form'].validate((valid) => {
-          if (valid) {
-            let data = {...this.form};
-            this.$refs.SubmitButton.start();
-            addRoleApi(data).then(() => {
+    };
+  },
+  methods: {
+    submitForm() {
+      this.$refs["Form"].validate(valid => {
+        if (valid) {
+          let data = { ...this.form };
+          this.$refs.SubmitButton.start();
+          addRoleApi(data)
+            .then(() => {
               this.$refs.SubmitButton.stop();
-              this.$emit('update');
-              this.cancel()
-            }).catch(() => {
-              this.$refs.SubmitButton.stop();
+              this.$emit("update");
+              this.cancel();
             })
-          } else {
-            return false;
-          }
-        });
-      },
-      cancel() {
-        this.visible = false;
-        Object.assign(this.$data.form, this.$options.data().form);
-        this.$refs['Form'].resetFields()
-      }
+            .catch(() => {
+              this.$refs.SubmitButton.stop();
+            });
+        } else {
+          return false;
+        }
+      });
+    },
+    cancel() {
+      this.visible = false;
+      Object.assign(this.$data.form, this.$options.data().form);
+      this.$refs["Form"].resetFields();
     }
   }
+};
 </script>
 
 <style lang="scss">
-  .el-textarea__inner {
-    height: 120px;
-  }
+.el-textarea__inner {
+  height: 120px;
+}
 </style>

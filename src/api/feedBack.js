@@ -1,4 +1,4 @@
-import {axiosG} from "@/api/request";
+import { axiosG } from "@/api/request";
 
 const pageFeedBack = "feedBack/pageFeedBack"; // 分页获得反馈
 

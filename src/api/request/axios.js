@@ -1,9 +1,9 @@
 import axios from "axios";
 import router from "@/router";
 import store from "@/store";
-import {errorMessage, successMsg, errorMsg, msgBox} from "@/utils/EUI";
-import {isEmpty} from "@/utils/common";
-import {timeout} from "@/settings";
+import { errorMessage, successMsg, errorMsg, msgBox } from "@/utils/EUI";
+import { isEmpty } from "@/utils/common";
+import { timeout } from "@/settings";
 
 let errorStatus = null;
 const service = axios.create({
@@ -29,11 +29,11 @@ service.interceptors.request.use(
 // 响应拦截
 service.interceptors.response.use(
   response => {
-    const {message, status} = response.data;
-    if (response.data.hasOwnProperty('resultParam')) {
-      if (response.data.resultParam.hasOwnProperty('reason')) {
+    const { message, status } = response.data;
+    if (response.data.hasOwnProperty("resultParam")) {
+      if (response.data.resultParam.hasOwnProperty("reason")) {
         errorMsg(response.data.resultParam.reason);
-        return response.data
+        return response.data;
       }
     }
     if (!isEmpty(message) && status === 200) successMsg(message);
@@ -61,17 +61,21 @@ service.interceptors.response.use(
       errorMessage("网络错误，无法连接到服务器！");
       return Promise.reject(error);
     }
-    const {status, message} = error.response.data;
+    const { status, message } = error.response.data;
     /* 401 */
     if (status === 401) {
       if (errorStatus === status) return;
       errorStatus = status;
-      msgBox("登录状态已过期，您可以继续留在该页面，或者重新登录", "重新登录", "系统提示")
-        .then(() => router.push({name: "login"}))
-        .catch(() => (errorStatus = null))
+      msgBox(
+        "登录状态已过期，您可以继续留在该页面，或者重新登录",
+        "重新登录",
+        "系统提示"
+      )
+        .then(() => router.push({ name: "login" }))
+        .catch(() => (errorStatus = null));
     } else if (status === 403) {
       /* 403 */
-      router.push({name: "error403"});
+      router.push({ name: "error403" });
     } else {
       /* elseStatus */
       if (!isEmpty(message)) errorMsg(message);

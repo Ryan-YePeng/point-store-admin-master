@@ -1,6 +1,5 @@
-import service from "./axios"
+import service from "./axios";
 import qs from "qs";
-
 
 /**
  * @param {String} url 请求地址
@@ -13,13 +12,13 @@ export const axiosG = (url, param) => {
       method: "get",
       url: url,
       params: param,
-      paramsSerializer: params => qs.stringify(params, {arrayFormat: 'repeat'})
+      paramsSerializer: params =>
+        qs.stringify(params, { arrayFormat: "repeat" })
     })
       .then(result => resolve(result))
       .catch(error => reject(error));
   });
 };
-
 
 /**
  * @param {String} url 请求地址
@@ -32,13 +31,13 @@ export const axiosD = (url, param) => {
       method: "delete",
       url: url,
       params: param,
-      paramsSerializer: params => qs.stringify(params, {arrayFormat: 'repeat'})
+      paramsSerializer: params =>
+        qs.stringify(params, { arrayFormat: "repeat" })
     })
       .then(result => resolve(result))
       .catch(error => reject(error));
   });
 };
-
 
 /**
  * @param {String} url 请求地址
@@ -51,13 +50,13 @@ export const axiosA = (url, param) => {
       method: "post",
       url: url,
       params: param,
-      paramsSerializer: params => qs.stringify(params, {arrayFormat: 'repeat'})
+      paramsSerializer: params =>
+        qs.stringify(params, { arrayFormat: "repeat" })
     })
       .then(result => resolve(result))
       .catch(error => reject(error));
   });
 };
-
 
 /**
  * @param {String} url 请求地址
@@ -70,13 +69,13 @@ export const axiosM = (url, param) => {
       method: "put",
       url: url,
       params: param,
-      paramsSerializer: params => qs.stringify(params, {arrayFormat: 'repeat'})
+      paramsSerializer: params =>
+        qs.stringify(params, { arrayFormat: "repeat" })
     })
       .then(result => resolve(result))
       .catch(error => reject(error));
   });
 };
-
 
 /**
  * @param {String} url 请求地址
@@ -89,14 +88,13 @@ export const axiosK = (url, param) => {
       method: "post",
       url: url,
       data: param,
-      headers: {"Content-Type": "application/x-www-form-urlencoded"},
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
       transformRequest: [data => qs.stringify(data)]
     })
       .then(result => resolve(result))
       .catch(error => reject(error));
   });
 };
-
 
 /**
  * @param {String} url 请求地址
@@ -109,14 +107,13 @@ export const axiosP = (url, param) => {
       method: "put",
       url: url,
       data: param,
-      headers: {"Content-Type": "application/x-www-form-urlencoded"},
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
       transformRequest: [data => qs.stringify(data)]
     })
       .then(result => resolve(result))
       .catch(error => reject(error));
   });
 };
-
 
 /**
  * @param {String} url 请求地址
@@ -129,14 +126,13 @@ export const axiosJ = (url, param) => {
       method: "post",
       url: url,
       data: param,
-      headers: {"Content-Type": "application/json"},
+      headers: { "Content-Type": "application/json" },
       transformRequest: [data => JSON.stringify(data)]
     })
       .then(result => resolve(result))
       .catch(error => reject(error));
   });
 };
-
 
 /**
  * @param {String} url 请求地址
@@ -149,14 +145,13 @@ export const axiosU = (url, param) => {
       method: "put",
       url: url,
       data: param,
-      headers: {"Content-Type": "application/json"},
+      headers: { "Content-Type": "application/json" },
       transformRequest: [data => JSON.stringify(data)]
     })
       .then(result => resolve(result))
       .catch(error => reject(error));
   });
 };
-
 
 /**
  * @param {String} url 请求地址
@@ -169,13 +164,12 @@ export const axiosF = (url, param) => {
       method: "post",
       url: url,
       data: param,
-      headers: {"Content-Type": "multipart/form-data"}
+      headers: { "Content-Type": "multipart/form-data" }
     })
       .then(result => resolve(result))
       .catch(error => reject(error));
   });
 };
-
 
 /**
  * @param {String} url 请求地址
@@ -204,8 +198,7 @@ export const axiosFs = (url, param, callback, source) => {
               if (data[key] instanceof Array)
                 for (let i = 0; i < data[key].length; i++)
                   formData.append(key, data[key][i]);
-              else
-                formData.append(key, data[key])
+              else formData.append(key, data[key]);
             }
           }
           return formData;
@@ -222,7 +215,6 @@ export const axiosFs = (url, param, callback, source) => {
   });
 };
 
-
 /**
  * @param {String} url 请求地址
  * @param {Object=} param 请求地址
@@ -235,7 +227,8 @@ export const axiosL = (url, param) => {
       url: url,
       responseType: "blob",
       params: param,
-      paramsSerializer: params => qs.stringify(params, {arrayFormat: 'repeat'})
+      paramsSerializer: params =>
+        qs.stringify(params, { arrayFormat: "repeat" })
     })
       .then(result => resolve(result))
       .catch(error => reject(error));

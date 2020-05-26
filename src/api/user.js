@@ -1,4 +1,4 @@
-import {axiosA, axiosD, axiosG, axiosM} from "@/api/request";
+import { axiosA, axiosD, axiosG, axiosM } from "@/api/request";
 
 const addUser = "admin/user/addUser"; // 新增用户
 const deleteUser = "admin/user/delUser"; // 删除用户

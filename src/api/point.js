@@ -1,4 +1,4 @@
-import {axiosD, axiosG, axiosK, axiosP} from "@/api/request";
+import { axiosD, axiosG, axiosK, axiosP } from "@/api/request";
 
 const addScore = "score/addScore"; // 添加积分兑换
 const delScore = "score/delScore"; // 删除积分兑换

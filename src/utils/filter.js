@@ -1,12 +1,11 @@
 import Vue from "vue";
-import {formatDateTime} from "@/utils/common";
-
+import { formatDateTime } from "@/utils/common";
 
 /**
  * @description 过滤时间
  * @return YYYY-MM-DD
  **/
-Vue.filter("formatDate", time => formatDateTime(time, '{Y}-{M}-{D}'));
+Vue.filter("formatDate", time => formatDateTime(time, "{Y}-{M}-{D}"));
 
 /**
  * @description 过滤时间

@@ -1,8 +1,7 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import createPersistedState from 'vuex-persistedstate'
+import Vue from "vue";
+import Vuex from "vuex";
+import createPersistedState from "vuex-persistedstate";
 import * as Cookies from "js-cookie";
-import {tokenCookieExpires} from '@/settings'
 
 Vue.use(Vuex);
 
@@ -18,29 +17,32 @@ const modules = modulesFiles.keys().reduce((modules, modulePath) => {
 // vuex持久化
 const plugins = [
   createPersistedState({
-    key: 'POINT-STORE-ADMIN-INFO',
+    key: "POINT-STORE-ADMIN-INFO",
     storage: window.localStorage,
-    reducer: val => ({info: val.info})
+    reducer: val => ({ info: val.info })
   }),
   createPersistedState({
-    key: 'POINT-STORE-ADMIN-SETTINGS',
+    key: "POINT-STORE-ADMIN-SETTINGS",
     storage: window.localStorage,
-    reducer: val => ({settings: val.settings})
+    reducer: val => ({ settings: val.settings })
   }),
   createPersistedState({
-    key: 'POINT-STORE-ADMIN-LAYOUT',
+    key: "POINT-STORE-ADMIN-LAYOUT",
     storage: window.sessionStorage,
-    reducer: val => ({layout: val.layout})
+    reducer: val => ({ layout: val.layout })
   }),
   createPersistedState({
-    key: 'POINT-STORE-ADMIN-TOKEN',
+    key: "POINT-STORE-ADMIN-TOKEN",
     storage: {
       getItem: key => Cookies.get(key),
       setItem: (key, value) =>
-        Cookies.set(key, value, {expires: modules.user.state.rememberMe ? tokenCookieExpires : 1, secure: false}),
+        Cookies.set(key, value, {
+          expires: modules.user.state.rememberMe ? 7 : 1,
+          secure: false
+        }),
       removeItem: key => Cookies.remove(key)
     },
-    reducer: val => ({token: val.token})
+    reducer: val => ({ token: val.token })
   })
 ];
 
@@ -52,6 +54,4 @@ const store = new Vuex.Store({
 Vue.prototype.$storeGet = store.getters;
 Vue.prototype.$storeSet = store.dispatch;
 
-export default store
-
-
+export default store;

@@ -2,7 +2,7 @@ module.exports = {
   /**
    * @description 网站标题
    */
-  title: '超市',
+  title: "超市",
   /**
    * @description 是否启用history
    */
@@ -10,31 +10,19 @@ module.exports = {
   /**
    * @description 是否显示logo
    */
-  isShowLogo: true,
+  isShowLogo: false,
   /**
    * @description 是否显示标签
    */
   isShowTag: true,
   /**
-   * @description 是否显示面包屑
-   */
-  isShowBreadcrumb: true,
-  /**
    * @description 是否显示设置的底部信息
    */
   isShowFooter: true,
   /**
-   * @description 底部文字
-   */
-  footerTxt: '',
-  /**
-   * @description 备案号
-   */
-  caseNumber: "",
-  /**
    * @description 菜单是否夜晚模式
    */
-  isNight: true,
+  isNight: false,
   /**
    * @description 菜单是否垂直
    */
@@ -46,17 +34,9 @@ module.exports = {
   /**
    * @description 组件大小设置
    */
-  layoutSize: 'small',
-  /**
-   * @description 分页条数设置
-   */
-  pagingSize: 10,
+  layoutSize: "small",
   /**
    * @description 请求超时时间，毫秒（默认20秒）
    */
-  timeout: 20 * 1000,
-  /**
-   * @description 记住密码状态下的token在Cookie中存储的天数，默认1天
-   */
-  tokenCookieExpires: 7
+  timeout: 20 * 1000
 };

@@ -1,4 +1,4 @@
-import {axiosG, axiosP} from "@/api/request";
+import { axiosG, axiosP } from "@/api/request";
 
 const exchange = "systemConfig/exchange"; // 兑换积分
 const getUser = "systemConfig/getUser"; // 获得用户信息

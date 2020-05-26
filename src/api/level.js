@@ -1,4 +1,4 @@
-import {axiosD, axiosG, axiosK, axiosP} from "@/api/request";
+import { axiosD, axiosG, axiosK, axiosP } from "@/api/request";
 
 const addMemberLevel = "memberLevel/addMemberLevel"; // 添加会员等级
 const delMemberLevel = "memberLevel/delMemberLevel"; // 删除会员等级
