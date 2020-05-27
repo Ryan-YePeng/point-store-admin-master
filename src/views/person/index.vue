@@ -16,14 +16,14 @@
           <span>手机号码</span>
           <span>{{ user.phone }}</span>
         </li>
-        <li>
-          <span>用户邮箱</span>
-          <span>{{ user.email }}</span>
-        </li>
-        <li>
-          <span>所属部门</span>
-          <span>{{ user.dept }}</span>
-        </li>
+        <!--<li>-->
+        <!--  <span>用户邮箱</span>-->
+        <!--  <span>{{ user.email }}</span>-->
+        <!--</li>-->
+        <!--<li>-->
+        <!--  <span>所属部门</span>-->
+        <!--  <span>{{ user.dept }}</span>-->
+        <!--</li>-->
         <li>
           <span>创建日期</span>
           <span>{{ user.createTime | formatDate }}</span>

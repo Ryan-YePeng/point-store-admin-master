@@ -34,26 +34,10 @@
       </el-form-item>
       <el-row>
         <el-col :span="8">
-          <el-form-item label="外链菜单">
-            <el-radio-group v-model="form.iframe">
-              <el-radio-button label="true">是</el-radio-button>
-              <el-radio-button label="false">否</el-radio-button>
-            </el-radio-group>
-          </el-form-item>
-        </el-col>
-        <el-col :span="8">
           <el-form-item label="菜单可见">
             <el-radio-group v-model="form.hidden">
               <el-radio-button label="false">是</el-radio-button>
               <el-radio-button label="true">否</el-radio-button>
-            </el-radio-group>
-          </el-form-item>
-        </el-col>
-        <el-col :span="8">
-          <el-form-item label="菜单缓存">
-            <el-radio-group v-model="form.cache">
-              <el-radio-button label="true">是</el-radio-button>
-              <el-radio-button label="false">否</el-radio-button>
             </el-radio-group>
           </el-form-item>
         </el-col>

@@ -14,15 +14,15 @@
             type="success"
             class="el-icon-search ml-5"
             @click="getRoleList"
-            >搜索</el-button
-          >
-          <el-button
-            type="primary"
-            icon="el-icon-plus"
-            @click="add"
-            class="float-right"
-            >新增</el-button
-          >
+            >搜索
+          </el-button>
+          <!--          <el-button-->
+          <!--            type="primary"-->
+          <!--            icon="el-icon-plus"-->
+          <!--            @click="add"-->
+          <!--            class="float-right"-->
+          <!--            >新增</el-button-->
+          <!--          >-->
         </div>
         <el-table
           v-loading="isTableLoading"
@@ -45,25 +45,25 @@
               <span>{{ scope.row.createTime | formatDateTime }}</span>
             </template>
           </el-table-column>
-          <el-table-column
-            label="操作"
-            fixed="right"
-            align="center"
-            width="150"
-          >
-            <template slot-scope="scope">
-              <el-button
-                type="primary"
-                icon="el-icon-edit"
-                @click.stop="edit(scope.row)"
-              ></el-button>
-              <delete-button
-                :ref="scope.row.id"
-                :id="scope.row.id"
-                @start="deleteRole"
-              />
-            </template>
-          </el-table-column>
+          <!--          <el-table-column-->
+          <!--            label="操作"-->
+          <!--            fixed="right"-->
+          <!--            align="center"-->
+          <!--            width="150"-->
+          <!--          >-->
+          <!--            <template slot-scope="scope">-->
+          <!--              <el-button-->
+          <!--                type="primary"-->
+          <!--                icon="el-icon-edit"-->
+          <!--                @click.stop="edit(scope.row)"-->
+          <!--              ></el-button>-->
+          <!--              <delete-button-->
+          <!--                :ref="scope.row.id"-->
+          <!--                :id="scope.row.id"-->
+          <!--                @start="deleteRole"-->
+          <!--              />-->
+          <!--            </template>-->
+          <!--          </el-table-column>-->
         </el-table>
       </el-card>
     </el-col>
@@ -158,6 +158,10 @@ export default {
       let data = {};
       data.roleId = this.id;
       data.menuIds = this.$refs.RoleMenuTree.get();
+      if (data.menuIds.length === 0) {
+        this.$errorMsg("至少分配一个菜单");
+        return;
+      }
       this.$refs.SubmitButton.start();
       editRolesMenusApi(data)
         .then(() => {

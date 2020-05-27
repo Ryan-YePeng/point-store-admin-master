@@ -46,18 +46,18 @@
         </template>
       </el-table-column>
       <el-table-column prop="permission" label="权限标识"></el-table-column>
-      <el-table-column label="外链">
-        <template slot-scope="scope">
-          <el-tag type="success" v-if="scope.row.iframe">是</el-tag>
-          <el-tag type="info" v-else>否</el-tag>
-        </template>
-      </el-table-column>
-      <el-table-column label="缓存">
-        <template slot-scope="scope">
-          <el-tag type="success" v-if="scope.row.cache">是</el-tag>
-          <el-tag type="info" v-else>否</el-tag>
-        </template>
-      </el-table-column>
+<!--      <el-table-column label="外链">-->
+<!--        <template slot-scope="scope">-->
+<!--          <el-tag type="success" v-if="scope.row.iframe">是</el-tag>-->
+<!--          <el-tag type="info" v-else>否</el-tag>-->
+<!--        </template>-->
+<!--      </el-table-column>-->
+<!--      <el-table-column label="缓存">-->
+<!--        <template slot-scope="scope">-->
+<!--          <el-tag type="success" v-if="scope.row.cache">是</el-tag>-->
+<!--          <el-tag type="info" v-else>否</el-tag>-->
+<!--        </template>-->
+<!--      </el-table-column>-->
       <el-table-column label="可见">
         <template slot-scope="scope">
           <el-tag type="info" v-if="scope.row.hidden">否</el-tag>

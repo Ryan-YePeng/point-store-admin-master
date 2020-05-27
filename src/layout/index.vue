@@ -43,21 +43,19 @@
         </el-header>
         <!-- 内容 -->
         <el-main class="main">
-          <scroll-pane ref="ScrollPane" :isUseGoBackTop="true">
-            <transition name="Ryan-animation">
-              <keep-alive :include="cache">
-                <router-view :key="key" />
-              </keep-alive>
-            </transition>
-          </scroll-pane>
+          <transition name="Ryan-animation" mode="out-in">
+            <keep-alive :include="cache">
+              <router-view :key="key" />
+            </keep-alive>
+          </transition>
         </el-main>
+        <el-backtop target=".main" :right="16"></el-backtop>
       </el-container>
     </el-container>
   </div>
 </template>
 
 <script>
-import ScrollPane from "./ScrollPane";
 import AdminMenu from "./AdminMenu";
 import Breadcrumb from "./Breadcrumb";
 import NavBar from "./NavBar";
@@ -66,7 +64,7 @@ import { footerTxt, caseNumber } from "@/settings";
 
 export default {
   name: "Layout",
-  components: { ScrollPane, NavBar, AdminMenu, Breadcrumb, Tag },
+  components: { NavBar, AdminMenu, Breadcrumb, Tag },
   data() {
     return {
       isCollapse: false,
@@ -172,30 +170,27 @@ export default {
   }
 
   .main {
-    padding: 0;
+    padding: 15px;
     background-color: $main-bg-color;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
 
-    .__view {
-      padding: 15px;
+    .Ryan-animation-enter-active {
+      transition: all 0.3s;
+    }
 
-      .Ryan-animation-enter-active {
-        transition: all 0.5s 0.6s;
-      }
+    .Ryan-animation-leave-active {
+      transition: all 0.3s;
+    }
 
-      .Ryan-animation-leave-active {
-        transition: all 0.5s;
-      }
+    .Ryan-animation-enter {
+      transform: translateX(-30px);
+      opacity: 0;
+    }
 
-      .Ryan-animation-enter {
-        transform: translateX(-30px);
-        opacity: 0;
-      }
-
-      .Ryan-animation-leave-to {
-        transform: translateX(30px);
-        opacity: 0;
-      }
+    .Ryan-animation-leave-to {
+      transform: translateX(30px);
+      opacity: 0;
     }
   }
 
