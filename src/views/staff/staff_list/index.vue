@@ -29,12 +29,6 @@
         <el-table-column prop="nickName" label="柜员名称"></el-table-column>
         <el-table-column prop="sex" label="性别"></el-table-column>
         <el-table-column prop="phone" label="电话"></el-table-column>
-        <el-table-column label="状态">
-          <template slot-scope="scope">
-            <el-tag type="info" v-if="scope.row.enabled">正常</el-tag>
-            <el-tag type="danger" v-else>禁用</el-tag>
-          </template>
-        </el-table-column>
         <el-table-column label="创建时间">
           <template slot-scope="scope">
             <span>{{ scope.row.createTime | formatDateTime }}</span>

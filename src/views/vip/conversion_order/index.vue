@@ -45,7 +45,7 @@
 import { pageOrdersApi, successExchangeApi } from "@/api/goods";
 
 export default {
-  name: "OrderList",
+  name: "ConversionOrder",
   data() {
     return {
       formData: [],

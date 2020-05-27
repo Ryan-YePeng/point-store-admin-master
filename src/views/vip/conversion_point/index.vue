@@ -25,7 +25,7 @@
 import { exchangeApi } from "@/api/system";
 
 export default {
-  name: "PointConversion",
+  name: "ConversionPoint",
   data() {
     return {
       form: {

@@ -32,12 +32,6 @@
         <el-table-column prop="score" label="当前积分"></el-table-column>
         <el-table-column prop="allScore" label="总积分"></el-table-column>
         <el-table-column prop="memberLevelName" label="等级"></el-table-column>
-        <el-table-column label="状态">
-          <template slot-scope="scope">
-            <el-tag type="info" v-if="scope.row.enabled">正常</el-tag>
-            <el-tag type="danger" v-else>禁用</el-tag>
-          </template>
-        </el-table-column>
         <el-table-column label="创建时间">
           <template slot-scope="scope">
             <span>{{ scope.row.createTime | formatDateTime }}</span>

@@ -69,7 +69,7 @@
 import { pageGoodsApi, exchangeGoodsApi } from "@/api/goods";
 
 export default {
-  name: "GoodsConversion",
+  name: "ConversionGoods",
   data() {
     return {
       formData: [],

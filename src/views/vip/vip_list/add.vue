@@ -22,12 +22,6 @@
           <el-radio label="女"></el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item slot="r" label="状态">
-        <el-radio-group v-model="form.enabled">
-          <el-radio :label="true">激活</el-radio>
-          <el-radio :label="false">禁用</el-radio>
-        </el-radio-group>
-      </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button @click="visible = false">取 消</el-button>

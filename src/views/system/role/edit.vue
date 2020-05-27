@@ -15,23 +15,6 @@
           <el-input v-model="form.permission"></el-input>
         </el-form-item>
       </row-col>
-      <row-col>
-        <el-form-item label="角色级别" prop="level">
-          <el-input-number
-            v-model="form.level"
-            controls-position="right"
-            :min="level"
-          >
-          </el-input-number>
-        </el-form-item>
-        <el-form-item slot="r" label="数据范围">
-          <el-select v-model="form.dataScope">
-            <el-option label="全部" value="全部"></el-option>
-            <el-option label="本级" value="本级"></el-option>
-            <el-option label="自定义" value="自定义"></el-option>
-          </el-select>
-        </el-form-item>
-      </row-col>
       <el-form-item label="数据权限" v-if="form.dataScope === '自定义'">
         <tree-select
           v-model="form.deptIds"
